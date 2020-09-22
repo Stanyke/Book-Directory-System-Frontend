@@ -37,6 +37,7 @@ html, body{
   color: white;
   background: #0A1014;
   transition: 2s;
+  padding: 0px;
 }
 
 .card:hover{
@@ -49,6 +50,7 @@ html, body{
   0 22.3px 17.9px rgba(0, 0, 0, 0.072),
   0 41.8px 33.4px rgba(0, 0, 0, 0.086),
   0 100px 80px rgba(0, 0, 0, 0.12);
+  border: 1px solid tomato;
 }
 
 .readMoreLink{
@@ -64,6 +66,31 @@ html, body{
 }
 
 .previewLink:hover{
-  opacity: 0.5;
+  opacity: 0.8;
   transition: 0.5s;
+}
+
+.authorName b{
+  color: tomato;
+}
+
+#bookContainer{
+  color: white;
+  background: #0A1014;
+  margin: auto;
+  display: none;
+  padding: 10px;
+}
+
+#bookContainer .bookTitle{
+  font-size: 40px;
+}
+
+#bookContainer .bookAuthor{
+  font-size: 13px;
+  font-family: "Segoe UI";
+}
+
+#bookContainer .bookAuthor .bookWriter{
+  color: tomato;
 }

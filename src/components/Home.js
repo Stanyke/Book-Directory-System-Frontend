@@ -26,7 +26,7 @@ class Home extends Component {
         .catch((err) => {
             document.getElementById('beatLoaders').style.display = "none";
             this.setState({
-                errorMessage: "There was an error while getting books, try again."
+                errorMessage: "There was a problem while getting books, try again."
             })
         })
     }
@@ -47,7 +47,7 @@ class Home extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-sm">
-                    <a className="navbar-brand" href="#">Book Directory</a>
+                    <Link className="navbar-brand" to="/">Book Directory</Link>
 
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
@@ -66,8 +66,9 @@ class Home extends Component {
                                 <img className="card-img-top" src={book.cover_image_url} alt="Book cover" style={divCardImg} />
                                 <div className="card-body">
                                     <h4 className="card-title">{book.title}</h4>
-                                    <p className="card-text">{this.trimCharacter(book.description)} <a href={"books/"+book._id} class="readMoreLink">Read More</a></p>
-                                    <Link className="previewLink btn btn-primary nav-link p-2" to={"books/"+book._id}>Preview</Link>
+                                    <p className="card-text">{this.trimCharacter(book.description)} <Link to={"book/"+book._id} class="readMoreLink">Read More</Link></p>
+                                    <p className="authorName" align="left">Author: <b>{book.author}</b></p>
+                                    <Link className="previewLink btn btn-primary nav-link p-2" to={"book/"+book._id}>Preview</Link>
                                 </div>
                             </div>
                         </div>) : null
@@ -78,11 +79,11 @@ class Home extends Component {
                         : null
                     }
                     
-                    </div>
-
-                    <div id="beatLoaders" align="center">
-                        <BeatLoader size={50} color="#c31432" loading />
-                        <b>Books Loading...</b>
+                        <div id="beatLoaders" align="center">
+                            <BeatLoader size={50} color="#c31432" loading />
+                            <b>Books Loading...</b>
+                        </div>
+                        
                     </div>
 
                 </div>
