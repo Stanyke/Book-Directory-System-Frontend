@@ -141,11 +141,11 @@ class Home extends Component {
     }
 
     switchPagination = (proposedBookPage) => {
+        document.title = `Page ${proposedBookPage} | Books Homepage`;
         toast.info(`Page ${proposedBookPage}`, {position: toast.POSITION.TOP_LEFT, autoClose: 1000});
         this.setState({
             currentPage: proposedBookPage
         })
-        document.title = `Page ${this.state.currentPage} | Books Homepage`;
     }
 }
 
