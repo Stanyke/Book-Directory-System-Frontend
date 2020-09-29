@@ -23,6 +23,10 @@ class Posts extends Component {
 
         toast.configure()
     }
+
+    componentDidMount(){
+        document.title = "Upload New Books"
+    }
     
     render() {
         const textareaStyle = { width: `100%`, height: `150px`, overflow: `auto`, resize: `none` }

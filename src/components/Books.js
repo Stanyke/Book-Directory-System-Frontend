@@ -26,12 +26,15 @@ class Books extends Component {
     }
     
     componentDidMount(){
+        document.title = `Book Loading...`;
+
         axios.get(`https://book-directory-system-api.herokuapp.com/api/books/${this.state.book_id}`)
         .then((res) => {
             document.getElementById('beatLoaders').style.display = "none";
             console.log(res.data.message)
             if(res.data.message.hasOwnProperty("title"))
             {
+                document.title = `${res.data.message.title} By ${res.data.message.author}`;
                 document.getElementById('bookContainer').style.display = "block";
                 this.setState({
                     author: res.data.message.author,
@@ -42,6 +45,7 @@ class Books extends Component {
             }
             else
             {
+                document.title = "Book Has Been Deleted";
                 this.setState({
                     errorMessage: res.data.message,
                     bookDelted: true
@@ -49,6 +53,7 @@ class Books extends Component {
             }
         })
         .catch((err) => {
+            document.title = "Book Couldn't Load"
             document.getElementById('beatLoaders').style.display = "none";
             console.log(err)
             this.setState({

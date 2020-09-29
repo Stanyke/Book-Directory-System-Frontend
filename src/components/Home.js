@@ -22,12 +22,15 @@ class Home extends Component {
     
 
     componentDidMount(){
+        document.title = `Books Homepage`;
+
         axios.get('https://book-directory-system-api.herokuapp.com/api/books')
         .then((res) => {
             document.getElementById('beatLoaders').style.display = "none";
             this.setState({
                 books: res.data.books
             })
+            document.title = `Page ${this.state.currentPage} | Books Homepage`;
         })
         .catch((err) => {
             document.getElementById('beatLoaders').style.display = "none";
@@ -142,6 +145,7 @@ class Home extends Component {
         this.setState({
             currentPage: proposedBookPage
         })
+        document.title = `Page ${this.state.currentPage} | Books Homepage`;
     }
 }
 
