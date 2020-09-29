@@ -75,7 +75,7 @@ class Post extends Component {
                             <input type="text" className="form-control" id="book_cover_from_url" placeholder="Book Cover URL (Link)" value={this.state.book_cover_from_url} onChange={(value) => this.setState({book_cover_from_url: value.target.value})} required disabled />
                         </div>
 
-                        <button type="submit" className="form-control btn btn-info"  id="publishBookButton">Publish Book</button>
+                        <button type="submit" className="form-control btn btn-info mt-1"  id="publishBookButton">Publish Book</button>
 
                     </form>
 
