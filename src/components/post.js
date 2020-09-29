@@ -70,7 +70,7 @@ class Post extends Component {
                         <div className="form-group">
                             <label><b>Book Cover:</b></label>
 
-                            <input type="file" className="form-control" id="book_cover_from_device" onChange={(value) => this.setState({book_cover_from_device: value.target.files[0]})} required disabled />
+                            <input type="file" className="form-control" id="book_cover_from_device" onChange={(value) => this.setState({book_cover_from_device: value.target.files[0]})} accept="image/*" required disabled />
 
                             <input type="text" className="form-control" id="book_cover_from_url" placeholder="Book Cover URL (Link)" value={this.state.book_cover_from_url} onChange={(value) => this.setState({book_cover_from_url: value.target.value})} required disabled />
                         </div>
@@ -222,56 +222,74 @@ class Post extends Component {
                 }
                 else
                 {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(book_cover_from_device);
+                    const fileInput = document.getElementById('book_cover_from_device');
+                    const filePath = fileInput.value; 
+        
+                    const allowedFileExtensions =  /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                    
+                    if (!allowedFileExtensions.exec(filePath))
+                    {
+                        fileInput.value = '';
+                        toast.error('File selected is not an image file, allowed file types are jpg, jpeg, png & gif.', {position: toast.POSITION.TOP_LEFT, autoClose: 5000});
+                        document.getElementById('beatLoadersForPostingBook').style.display = "none";
+                        document.getElementById('publishBookButton').disabled = false;
+                    }
+                    else
+                    {
 
-                    reader.onerror = () => {
-                        toast.error('There was an error processing your file, try again.', {position: toast.POSITION.TOP_LEFT, autoClose: 5000});
-                    };
+                        const reader = new FileReader();
+                        reader.readAsDataURL(book_cover_from_device);
 
-                    reader.onloadend = () => {
-                        const base64EncodedImage = reader.result;
-
-                        
-                        const publishBookData = {
-                            title: book_title,
-                            description : book_highlight,
-                            cover_image: base64EncodedImage,
-                            author
-                        }
-
-                        axios.post(`https://book-directory-system-api.herokuapp.com/api/books_with_file`, publishBookData)
-                        .then((res) => {
+                        reader.onerror = () => {
+                            toast.error('There was an error processing your file, try again.', {position: toast.POSITION.TOP_LEFT, autoClose: 5000});
                             document.getElementById('beatLoadersForPostingBook').style.display = "none";
                             document.getElementById('publishBookButton').disabled = false;
-                            toast.info(res.data.message, {position: toast.POSITION.TOP_LEFT, autoClose: 2000});
+                        };
 
-                            console.log(res.data)
-                            this.setState({
-                                newBookID: res.data.book._id
+                        reader.onloadend = () => {
+                            const base64EncodedImage = reader.result;
+
+                            
+                            const publishBookData = {
+                                title: book_title,
+                                description : book_highlight,
+                                cover_image: base64EncodedImage,
+                                author
+                            }
+
+                            axios.post(`https://book-directory-system-api.herokuapp.com/api/books_with_file`, publishBookData)
+                            .then((res) => {
+                                document.getElementById('beatLoadersForPostingBook').style.display = "none";
+                                document.getElementById('publishBookButton').disabled = false;
+                                toast.info(res.data.message, {position: toast.POSITION.TOP_LEFT, autoClose: 2000});
+
+                                console.log(res.data)
+                                this.setState({
+                                    newBookID: res.data.book._id
+                                })
+                                document.getElementById('redirectionPreviewAfterPublishingBook').style.display = 'block'
                             })
-                            document.getElementById('redirectionPreviewAfterPublishingBook').style.display = 'block'
-                        })
-                        .catch((err) => {
-                            document.getElementById('beatLoadersForPostingBook').style.display = "none";
-                            document.getElementById('publishBookButton').disabled = false;
+                            .catch((err) => {
+                                document.getElementById('beatLoadersForPostingBook').style.display = "none";
+                                document.getElementById('publishBookButton').disabled = false;
 
-                            const errorStatus = err.response.status;
-                            if(errorStatus === 417)
-                            {
-                                toast.error(err.response.data.message, {position: toast.POSITION.TOP_LEFT, autoClose: 8000});
-                            }
+                                const errorStatus = err.response.status;
+                                if(errorStatus === 417)
+                                {
+                                    toast.error(err.response.data.message, {position: toast.POSITION.TOP_LEFT, autoClose: 8000});
+                                }
 
-                            if(errorStatus === 500 && err.response.data.hasOwnProperty("message"))
-                            {
-                                toast.error(err.response.data.message, {position: toast.POSITION.TOP_LEFT, autoClose: 8000});
-                            }
-                            else{
-                                toast.error(err.response.data, {position: toast.POSITION.TOP_LEFT, autoClose: 8000});
-                            }
+                                if(errorStatus === 500 && err.response.data.hasOwnProperty("message"))
+                                {
+                                    toast.error(err.response.data.message, {position: toast.POSITION.TOP_LEFT, autoClose: 8000});
+                                }
+                                else{
+                                    toast.error(err.response.data, {position: toast.POSITION.TOP_LEFT, autoClose: 8000});
+                                }
 
-                        })
-                    };                    
+                            })
+                        };
+                    }                 
                 }
             }
         }
