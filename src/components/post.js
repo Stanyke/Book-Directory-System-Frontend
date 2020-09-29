@@ -85,10 +85,10 @@ class Post extends Component {
                     </div>
 
                     <div id="redirectionPreviewAfterPublishingBook" align="center">
-                        <b>Preview your Newly Published Book</b> 
+                        <b>Preview your newly published book?</b> 
                         <div>
-                            <Link className="btn btn-primary p-2 mr-4" to={"book/"+this.state.newBookID}>Cool 😆</Link>
-                            <button className="btn btn-danger p-2" onClick={() => this.closeAfterBookPublishNotice()}>Nope 😮</button>
+                            <Link className="btn btn-primary p-2 mr-4" to={"book/"+this.state.newBookID}>Cool <span role="img" aria-label="Cool">😆</span></Link>
+                            <button className="btn btn-danger p-2" onClick={() => this.closeAfterBookPublishNotice()}>Nope <span role="img" aria-label="Nope">😮</span></button>
                         </div>
                     </div>
 

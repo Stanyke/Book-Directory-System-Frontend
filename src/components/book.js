@@ -108,7 +108,7 @@ class Books extends Component {
 
                         {
                             errorMessage ? <div align="center" className="col-12">
-                                {errorMessage}
+                                <b>{errorMessage}</b>
 
                                 {
                                     bookDelted ? "" : <p>Possibly caused by an invalid link.</p>
@@ -126,8 +126,8 @@ class Books extends Component {
                         <div id="deleteBookNotice" align="center">
                             <b>Are you sure you want to delete this book?</b>
                             <div>
-                                <button type="button" className="btn btn-danger pt-2 pd-2 pl-4 pr-4 mr-3" onClick={() => this.continueBookDelete()}>Yes</button>
-                                <button type="button" className="btn btn-info pt-2 pd-2 pl-4 pr-4" onClick={() => this.cancelBookDelete()}>No</button>
+                                <button type="button" className="btn btn-danger pt-2 pd-2 pl-4 pr-4 mr-3" onClick={() => this.continueBookDelete()}>Yes <span role="img" aria-label="Yes">✔️</span></button>
+                                <button type="button" className="btn btn-info pt-2 pd-2 pl-4 pr-4" onClick={() => this.cancelBookDelete()}>No <span role="img" aria-label="No">✖️</span></button>
                             </div>
 
                         </div>
