@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Home from './components/home';
-import Books from './components/book';
-import Post from './components/post';
+import Home from './components/Home';
+import Books from './components/Book';
+import Post from './components/Post';
 
 function App() {
   return (
