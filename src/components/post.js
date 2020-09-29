@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 
-class Post extends Component {
+class Posts extends Component {
 
     constructor(props) {
         super(props)
@@ -303,4 +303,4 @@ class Post extends Component {
 
 }
 
-export default Post
+export default Posts
