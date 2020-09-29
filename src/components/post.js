@@ -34,7 +34,7 @@ class Post extends Component {
 
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link className="btn btn-outline-info nav-link p-2" to="/">Back</Link>
+                            <Link className="btn btn-outline-info nav-link p-2" to="/">Home</Link>
                         </li>
                     </ul>
                 </nav>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import { BeatLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 
 class Home extends Component {
@@ -10,8 +12,12 @@ class Home extends Component {
     
         this.state = {
             books: [],
-            errorMessage: ''
+            errorMessage: '',
+            currentPage: '1',
+            booksPerPage: '5'
         }
+
+        toast.configure()
     }
     
 
@@ -43,7 +49,37 @@ class Home extends Component {
 
         const divCardImg = { width: `100%`, height: `300px` }
 
-        const { books, errorMessage } = this.state
+        const { books, errorMessage, currentPage, booksPerPage } = this.state
+
+        const indexOfLastPage = currentPage * booksPerPage;
+        const indexOfFirstPage = indexOfLastPage - booksPerPage;
+        const currentBooks = books.slice(indexOfFirstPage, indexOfLastPage);
+
+        const totalBooks = books.length;
+        const bookPagination = (booksPerPage, totalBooks) => {
+            const booksPageNumbers = []
+
+            for(let i = 1; i <= Math.ceil(totalBooks / booksPerPage); i++)
+            {
+                booksPageNumbers.push(i)
+            }
+
+            return(
+                <ul className="pagination">
+                {
+                    booksPageNumbers.map(bookNumber => (
+                        <li key={bookNumber} className="page-item">
+                            <Link to="" className="page-link" onClick={() => this.switchPagination(bookNumber)}>
+                                {bookNumber}
+                            </Link>
+                        </li>
+                    ))
+                }
+            </ul>
+            )
+        }
+
+
         return (
             <div>
                 <nav className="navbar navbar-expand-sm">
@@ -60,8 +96,8 @@ class Home extends Component {
                     <div className="row">
                     
                     {
-                        books.length ?
-                        books.map(book => <div key={book._id} className="col-md-4 mt-4" align="center">
+                        currentBooks.length ?
+                        currentBooks.map(book => <div key={book._id} className="col-md-4 mt-4" align="center">
                             <div className="card col-md-12">
                                 <img className="card-img-top" src={book.cover_image_url} alt="Book cover" style={divCardImg} />
                                 <div className="card-body">
@@ -83,12 +119,29 @@ class Home extends Component {
                             <BeatLoader size={50} color="#c31432" loading />
                             <b>Books Loading...</b>
                         </div>
+
+                        
                         
                     </div>
 
                 </div>
+
+                <div class="container">
+                    {
+                        currentBooks.length ? bookPagination(booksPerPage, totalBooks) : null
+                    }
+                </div>
+                
+                
             </div>
         )
+    }
+
+    switchPagination = (proposedBookPage) => {
+        toast.info(`Page ${proposedBookPage}`, {position: toast.POSITION.TOP_LEFT, autoClose: 1000});
+        this.setState({
+            currentPage: proposedBookPage
+        })
     }
 }
 

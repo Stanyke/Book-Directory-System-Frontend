@@ -76,7 +76,7 @@ class Books extends Component {
                                 <Link className="btn btn-outline-info nav-link p-2 mr-3" to="/">Home</Link>
                             </li>
                             <li>
-                                <Link className="btn btn-outline-info nav-link p-2" to="/post">Post</Link>
+                                <Link className="btn btn-outline-info nav-link p-2" to="/post">New Book</Link>
                             </li>
 
                         </ul>
