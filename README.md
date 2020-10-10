@@ -3,7 +3,7 @@ This is a Node.js & Express.js API used in managing a book directory system with
 
 *This API is used in storing and managing books data such as book title, author, short description of what the book is all about, also the time it was uploaded at into a mongoDB's mongoose server including uploading of book cover (image file, supported format .jpg/.jpeg/.png/.gif) to my cloudinary library.*
 
-## Note that this is the frontend, the APIs have been properly used, the below documentation states how to use the APIs.
+## Note that this is the frontend which is easy to use as the APIs have been properly used, the below documentation states how to use the APIs.
 
 **<u>How The API Works</u>**
 
