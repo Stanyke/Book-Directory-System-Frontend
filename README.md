@@ -5,7 +5,9 @@ This is a Node.js & Express.js API used in managing a book directory system with
 
 ## Note that this is the frontend which is easy to use as the APIs have been properly used, the below documentation states how to use the APIs.
 
-**<u>How The API Works</u>**
+Visit <b>https://bookdir.herokuapp.com</b> to make use of the Book Directory System (Frontend).
+
+**<u>How The API Works (Backend)</u>**
 
 NB: You may need Postman application to completely make use of this API.
 
