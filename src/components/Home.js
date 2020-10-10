@@ -100,7 +100,7 @@ class Home extends Component {
                     
                     {
                         currentBooks.length ?
-                        currentBooks.map(book => <div key={book._id} className="col-md-4 mt-4" align="center">
+                        currentBooks.map(book => <div key={book._id} className="col-md-4 col-sm-6 mt-4" align="center">
                             <div className="card col-md-12">
                                 <img className="card-img-top" src={book.cover_image_url} alt="Book cover" style={divCardImg} />
                                 <div className="card-body">
